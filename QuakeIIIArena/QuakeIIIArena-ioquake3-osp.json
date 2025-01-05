@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-01-04T23:14:16+00:00",
+    "exported_at": "2025-01-05T15:45:13+00:00",
     "name": "Quake III Arena (ZPH)",
     "author": "ilumos@gmail.com",
     "description": null,
@@ -13,7 +13,7 @@
         "ghcr.io\/ptero-eggs\/yolks:debian": "ghcr.io\/ptero-eggs\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/ioq3ded +set fs_game osp +set dedicated 1 +set net_port {{SERVER_PORT}} +exec server-zph.cfg",
+    "startup": ".\/ioq3ded +set fs_game osp +set dedicated 1 +set net_port {{SERVER_PORT}} +exec {{SERVER_CONFIG}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"AAS initialized.\"\r\n}",
@@ -27,5 +27,16 @@
             "entrypoint": "bash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "name": "Server Config File",
+            "description": "The filename of the config file the server should execute",
+            "env_variable": "SERVER_CONFIG",
+            "default_value": "zph-multi.cfg",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:zph-multi.cfg,zph-ctf.cfg,zph-ca.cfg",
+            "field_type": "text"
+        }
+    ]
 }
