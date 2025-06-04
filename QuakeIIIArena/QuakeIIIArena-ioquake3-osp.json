@@ -4,8 +4,8 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-01-05T15:45:13+00:00",
-    "name": "Quake III Arena (ZPH)",
+    "exported_at": "2025-06-04T12:36:22+01:00",
+    "name": "Quake III Arena: ioquake3 & OSP (ZPH)",
     "author": "ilumos@gmail.com",
     "description": null,
     "features": null,
@@ -35,7 +35,7 @@
             "default_value": "zph-multi.cfg",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:zph-multi.cfg,zph-ctf.cfg,zph-ca.cfg",
+            "rules": "required|string|in:zph-multi.cfg,zph-ctf.cfg,zph-ca.cfg,zph-freezetag.cfg,zph-instagib.cfg",
             "field_type": "text"
         }
     ]
