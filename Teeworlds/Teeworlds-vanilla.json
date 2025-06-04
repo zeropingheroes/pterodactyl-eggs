@@ -4,10 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-12-29T20:57:47+00:00",
-    "name": "ZPH Teeworlds",
+    "exported_at": "2025-06-04T12:18:09+01:00",
+    "name": "Teeworlds (ZPH)",
     "author": "ilumos@gmail.com",
-    "description": "",
+    "description": null,
     "features": null,
     "docker_images": {
         "ghcr.io\/ptero-eggs\/yolks:debian": "ghcr.io\/ptero-eggs\/yolks:debian"
@@ -15,8 +15,8 @@
     "file_denylist": [],
     "startup": ".\/teeworlds_srv",
     "config": {
-        "files": "{\r\n    \"autoexec.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"bindaddr\": \"bindaddr 0.0.0.0\",\r\n            \"sv_port\": \"sv_port {{server.build.default.port}}\",\r\n            \"sv_name\": \"sv_name {{server.build.env.SERVER_NAME}}\",\r\n            \"sv_motd\": \"sv_motd {{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"as master, sending heartbeats\"\r\n}",
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"server name is\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
@@ -27,26 +27,5 @@
             "entrypoint": "bash"
         }
     },
-    "variables": [
-        {
-            "name": "Server Name",
-            "description": "The Display Name for the server",
-            "env_variable": "SERVER_NAME",
-            "default_value": "Zero Ping Heroes",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Server MotD",
-            "description": "Server Message of the Day displayed to all users.",
-            "env_variable": "SERVER_MOTD",
-            "default_value": "Beep boop!\\n\\n It's Teeworlds CTF! \\n\\n\\n WSAD - Move \\n Left click - shoot \\n Right click - grapple \\n Mouse wheel - change weapon \\n Space - (double) jump \\n\\n Esc - close this message!",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        }
-    ]
+    "variables": []
 }
