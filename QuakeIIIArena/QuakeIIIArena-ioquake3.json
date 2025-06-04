@@ -4,8 +4,8 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-06-04T12:36:22+01:00",
-    "name": "Quake III Arena: ioquake3 & OSP (ZPH)",
+    "exported_at": "2025-06-04T13:36:21+01:00",
+    "name": "Quake III Arena (ZPH)",
     "author": "ilumos@gmail.com",
     "description": null,
     "features": null,
@@ -13,7 +13,7 @@
         "ghcr.io\/ptero-eggs\/yolks:debian": "ghcr.io\/ptero-eggs\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/ioq3ded +set fs_game osp +set dedicated 1 +set net_port {{SERVER_PORT}} +exec {{SERVER_CONFIG}}",
+    "startup": ".\/ioq3ded +set fs_game {{SERVER_MOD}} +set dedicated 1 +set net_port {{SERVER_PORT}} +exec {{SERVER_CONFIG}}.cfg",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"AAS initialized.\"\r\n}",
@@ -32,10 +32,20 @@
             "name": "Server Config File",
             "description": "The filename of the config file the server should execute",
             "env_variable": "SERVER_CONFIG",
-            "default_value": "zph-multi.cfg",
+            "default_value": "zph-vanilla-ffa-then-ctf",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:zph-multi.cfg,zph-ctf.cfg,zph-ca.cfg,zph-freezetag.cfg,zph-instagib.cfg",
+            "rules": "required|string|in:zph-vanilla-ffa-then-ctf,zph-vanilla-ctf,zph-osp-clanarena,zph-osp-freezetag,zph-osp-instagib",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Mod",
+            "description": "The mod to load (if any)",
+            "env_variable": "SERVER_MOD",
+            "default_value": "osp",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20|in:baseq3,osp",
             "field_type": "text"
         }
     ]
