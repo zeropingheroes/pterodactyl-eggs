@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-06-06T01:29:45+01:00",
+    "name": "Counter-Strike 2 (ZPH)",
+    "author": "ilumos@gmail.com",
+    "description": "",
+    "features": [],
+    "docker_images": {
+        "SteamRT3": "ghcr.io\/1zc\/steamrt3-pterodactyl:latest"
+    },
+    "file_denylist": [],
+    "startup": ".\/game\/cs2.sh -dedicated -ip {{SERVER_IP}} -port {{SERVER_PORT}} +exec {{SERVER_CONFIG}}.cfg",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Host activate: Loading\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login anonymous +app_update 730 +quit\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n# download ZPH configs\r\ncd \/tmp\r\ngit clone https:\/\/github.com\/zeropingheroes\/game-servers.git\r\n\r\n# Copy ZPH configs into place\r\ncp -fr game-servers\/linux\/CounterStrike2\/configs\/* \/mnt\/server\/",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Config File",
+            "description": "The filename of the config file the server should execute",
+            "env_variable": "SERVER_CONFIG",
+            "default_value": "zph-casual-demolition",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:zph-arms-race,zph-casual-demolition,zph-casual-hostage,zph-competitive,zph-deathmatch,zph-wingman",
+            "field_type": "text"
+        }
+    ]
+}
