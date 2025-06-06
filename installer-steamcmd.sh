@@ -10,7 +10,7 @@ STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.ta
 STEAMCMD_USER="${STEAMCMD_USER:-anonymous}"
 STEAMCMD_PASS="${STEAMCMD_PASS:-}"
 STEAMCMD_2FA="${STEAMCMD_2FA:-}"
-STEAMCMD_VALIDATE="${STEAMCMD_VALIDATE:0}"
+STEAMCMD_VALIDATE="${STEAMCMD_VALIDATE:-0}"
 
 # Require STEAMCMD_APPID to be set
 if [ -z "${STEAMCMD_APPID:-}" ]; then
