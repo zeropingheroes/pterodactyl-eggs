@@ -47,11 +47,17 @@ chown -R root:root "/mnt"
 export HOME="${BASE_DIR}"
 
 STEAMCMD_ARGS=(
-    +force_install_dir "${BASE_DIR}"
-    +login "${STEAMCMD_USER}" "${STEAMCMD_PASS}" "${STEAMCMD_2FA}"
-    +app_update "${STEAMCMD_APPID}" "${STEAMCMD_VALIDATE}"
-    +quit
+    +force_install_dir "$BASE_DIR"
+    +login "$STEAMCMD_USER"
 )
+
+[[ -n $STEAMCMD_PASS ]] && STEAMCMD_ARGS+=("$STEAMCMD_PASS")
+[[ -n $STEAMCMD_2FA ]] && STEAMCMD_ARGS+=("$STEAMCMD_2FA")
+
+STEAMCMD_ARGS+=(+app_update "$STEAMCMD_APPID")
+[[ -n $STEAMCMD_VALIDATE ]] && STEAMCMD_ARGS+=("$STEAMCMD_VALIDATE")
+STEAMCMD_ARGS+=(+quit)
+
 
 echo_info "Starting SteamCMD and downloading Steam app ${STEAMCMD_APPID}"
 echo_info "${BASE_DIR}/steamcmd/steamcmd.sh ${STEAMCMD_ARGS[*]}"
