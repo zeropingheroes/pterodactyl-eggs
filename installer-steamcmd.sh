@@ -23,6 +23,13 @@ if [[ "$STEAMCMD_VALIDATE" != [01] ]]; then
     echo "STEAMCMD_VALIDATE must be 0 or 1."; exit 1
 fi
 
+# Prepare STEAMCMD_VALIDATE to use as SteamCMD argument
+if [[ "$STEAMCMD_VALIDATE" == "1" ]]; then
+    STEAMCMD_VALIDATE="validate"
+else
+    STEAMCMD_VALIDATE=""
+fi
+
 # Download and install SteamCMD
 mkdir -p "${BASE_DIR}/steamcmd"
 curl -sSL "${STEAMCMD_URL}" | tar -xzvf - -C "${BASE_DIR}/steamcmd"
@@ -36,7 +43,7 @@ export HOME="${BASE_DIR}"
 # Download game files
 "${BASE_DIR}/steamcmd/steamcmd.sh" +force_install_dir "${BASE_DIR}" \
     +login "${STEAMCMD_USER}" "${STEAMCMD_PASS}" "${STEAMCMD_2FA}" \
-    +app_update "${STEAMCMD_APPID}" "${STEAMCMD_VALIDATE:+validate}" \
+    +app_update "${STEAMCMD_APPID}" "${STEAMCMD_VALIDATE}" \
     +quit
 
 # Copy Steam libraries into place
