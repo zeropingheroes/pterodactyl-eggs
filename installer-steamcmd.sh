@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#set -o errexit
-#set -o pipefail
-
 # Set optional variables with defaults
 BASE_DIR="${BASE_DIR:-/mnt/server}"
 BASE_DIR="${BASE_DIR%/}" # Remove trailing slash
@@ -46,14 +43,11 @@ echo "Downloading Steam app ${STEAMCMD_APPID}"
     +app_update "${STEAMCMD_APPID}" "${STEAMCMD_VALIDATE}" \
     +quit
 
-echo "Exit code: $?"
-echo
-cat /mnt/server/Steam/logs/stderr.txt
-echo
+echo "SteamCMD exit code: $?"
 
 echo "Copying Steam libraries into place"
 mkdir -p "${BASE_DIR}/.steam/sdk32" "${BASE_DIR}/.steam/sdk64"
 cp -v "${BASE_DIR}/steamcmd/linux32/steamclient.so" "${BASE_DIR}/.steam/sdk32/steamclient.so"
 cp -v "${BASE_DIR}/steamcmd/linux64/steamclient.so" "${BASE_DIR}/.steam/sdk64/steamclient.so"
 
-echo "Done"
+echo "Successfully installed SteamCMD and Steam app {STEAMCMD_APPID}"
