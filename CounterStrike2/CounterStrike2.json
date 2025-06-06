@@ -8,10 +8,7 @@
     "name": "Counter-Strike 2 (ZPH)",
     "author": "ilumos@gmail.com",
     "description": null,
-    "features": [
-        "gsl_token",
-        "steam_disk_space"
-    ],
+    "features": [],
     "docker_images": {
         "SteamRT3": "ghcr.io\/1zc\/steamrt3-pterodactyl:latest"
     },
