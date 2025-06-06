@@ -43,7 +43,7 @@ curl -sSL "${STEAMCMD_URL}" | tar -xzvf - -C "${BASE_DIR}/steamcmd"
 echo_info "Preparing directories for SteamCMD"
 mkdir -p "${BASE_DIR}/steamapps"
 cd "${BASE_DIR}/steamcmd"
-chown -R root:root "/mnt"
+chown -R root:root "${BASE_DIR}"
 export HOME="${BASE_DIR}"
 
 STEAMCMD_ARGS=(
