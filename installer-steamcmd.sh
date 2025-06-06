@@ -43,7 +43,7 @@ curl -sSL "${STEAMCMD_URL}" | tar -xzvf - -C "${BASE_DIR}/steamcmd"
 echo_info "Preparing directories for SteamCMD"
 mkdir -p "${BASE_DIR}/steamapps"
 cd "${BASE_DIR}/steamcmd"
-chown -R root:root "${BASE_DIR}"
+chown -R root:root "/mnt"
 export HOME="${BASE_DIR}"
 
 echo_info "Starting SteamCMD and downloading Steam app ${STEAMCMD_APPID}"
