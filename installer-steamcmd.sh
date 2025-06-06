@@ -46,12 +46,17 @@ cd "${BASE_DIR}/steamcmd"
 chown -R root:root "/mnt"
 export HOME="${BASE_DIR}"
 
+STEAMCMD_ARGS=(
+    +force_install_dir "${BASE_DIR}"
+    +login "${STEAMCMD_USER}" "${STEAMCMD_PASS}" "${STEAMCMD_2FA}"
+    +app_update "${STEAMCMD_APPID}" "${STEAMCMD_VALIDATE}"
+    +quit
+)
+
 echo_info "Starting SteamCMD and downloading Steam app ${STEAMCMD_APPID}"
+echo_info "${BASE_DIR}/steamcmd/steamcmd.sh ${STEAMCMD_ARGS[*]}"
 if {
-    "${BASE_DIR}/steamcmd/steamcmd.sh" +force_install_dir "${BASE_DIR}" \
-        +login "${STEAMCMD_USER}" "${STEAMCMD_PASS}" "${STEAMCMD_2FA}" \
-        +app_update "${STEAMCMD_APPID}" "${STEAMCMD_VALIDATE}" \
-        +quit
+    "${BASE_DIR}/steamcmd/steamcmd.sh" "${STEAMCMD_ARGS[@]}"
 }; then
     echo_info "SteamCMD successfully downloaded, updated or validated Steam app ${STEAMCMD_APPID}"
 else
