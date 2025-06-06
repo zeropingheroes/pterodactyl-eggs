@@ -60,7 +60,7 @@ fi
 
 echo_info "Copying Steam libraries into place"
 mkdir -p "${BASE_DIR}/.steam/sdk32" "${BASE_DIR}/.steam/sdk64"
-cp -v "${BASE_DIR}/steamcmd/linux32/steamclient.so" "${BASE_DIR}/.steam/sdk32/steamclient.so"
-cp -v "${BASE_DIR}/steamcmd/linux64/steamclient.so" "${BASE_DIR}/.steam/sdk64/steamclient.so"
+cp "${BASE_DIR}/steamcmd/linux32/steamclient.so" "${BASE_DIR}/.steam/sdk32/steamclient.so"
+cp "${BASE_DIR}/steamcmd/linux64/steamclient.so" "${BASE_DIR}/.steam/sdk64/steamclient.so"
 
 echo_info "Successfully installed SteamCMD and Steam app ${STEAMCMD_APPID}"
