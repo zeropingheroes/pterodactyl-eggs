@@ -47,6 +47,9 @@ echo "Downloading Steam app ${STEAMCMD_APPID}"
     +quit
 
 echo "Exit code: $?"
+echo
+cat /mnt/server/Steam/logs/stderr.txt
+echo
 
 echo "Copying Steam libraries into place"
 mkdir -p "${BASE_DIR}/.steam/sdk32" "${BASE_DIR}/.steam/sdk64"
