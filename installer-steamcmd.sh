@@ -1,7 +1,7 @@
 #!/bin/bash
 
-set -o errexit
-set -o pipefail
+#set -o errexit
+#set -o pipefail
 
 # Set optional variables with defaults
 BASE_DIR="${BASE_DIR:-/mnt/server}"
@@ -45,6 +45,8 @@ echo "Downloading Steam app ${STEAMCMD_APPID}"
     +login "${STEAMCMD_USER}" "${STEAMCMD_PASS}" "${STEAMCMD_2FA}" \
     +app_update "${STEAMCMD_APPID}" "${STEAMCMD_VALIDATE}" \
     +quit
+
+echo "Exit code: $?"
 
 echo "Copying Steam libraries into place"
 mkdir -p "${BASE_DIR}/.steam/sdk32" "${BASE_DIR}/.steam/sdk64"
