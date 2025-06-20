@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-06-06T20:35:31+01:00",
+    "exported_at": "2025-06-20T20:39:57+01:00",
     "name": "Quake III Arena (ZPH)",
     "author": "ilumos@gmail.com",
     "description": null,
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\nset -o errexit\r\nset -o pipefail\r\n\r\necho_info(){ echo -e \"\\033[0;32m$*\\033[0m\"; }\r\necho_error(){ echo -e \"\\033[0;31m$*\\033[0m\" >&2; }\r\necho_warning(){ echo -e \"\\033[0;33m$*\\033[0m\"; }\r\n\r\necho_info \"Installing ioquake3-server\"\r\napt update\r\napt install -y ioquake3-server\r\ncp -r \/usr\/lib\/ioquake3\/* \/mnt\/server\/\r\n\r\nif [ ! -d \/mnt\/server\/.egg-install ]; then\r\n    mkdir -p \/mnt\/server\/.egg-install\r\nfi\r\n\r\ncd \/mnt\/server\/.egg-install\r\n\r\nif [ ! -f \"quake3-1.32-assets.zip\" ]; then\r\n    echo_info \"Downloading Q3A assets archive\"\r\n    curl -sSL \"https:\/\/drive.usercontent.google.com\/download?id=1ZQQZv4PT6yuSAQ5zoEgOen-sPKW9lCy2&confirm=y\" -o \"quake3-1.32-assets.zip\"\r\nfi\r\n\r\necho_info \"Extracting Q3A assets\"\r\nunzip -q -o \"quake3-1.32-assets.zip\" -d \"\/mnt\/server\/\"\r\n\r\nif [ ! -f \"osp-Quake3-1.03a_full.zip\" ]; then\r\n    echo_info \"Downloading Q3A OSP mod\"\r\n    curl -sSL \"https:\/\/drive.usercontent.google.com\/download?id=1RrHzS_FpERtNDYxqflnijlT9gbmsEH5U&confirm=y\" -o \"osp-Quake3-1.03a_full.zip\"\r\nfi\r\necho_info \"Extracting OSP mod\"\r\nunzip -q -o \"osp-Quake3-1.03a_full.zip\" -d \"\/mnt\/server\/\"\r\n\r\ncd \/tmp\r\necho_info \"Getting ZPH configs\"\r\ngit clone https:\/\/github.com\/zeropingheroes\/game-servers.git\r\n\r\necho_info \"Copying ZPH configs into place\"\r\ncp -r \/tmp\/game-servers\/QuakeIIIArena\/configs\/* \/mnt\/server\/\r\n\r\necho_info \"Install complete\"",
+            "script": "#!\/bin\/bash\r\n\r\nset -o errexit\r\nset -o pipefail\r\n\r\necho_info(){ echo -e \"\\033[0;32m$*\\033[0m\"; }\r\necho_error(){ echo -e \"\\033[0;31m$*\\033[0m\" >&2; }\r\necho_warning(){ echo -e \"\\033[0;33m$*\\033[0m\"; }\r\n\r\necho_info \"Installing ioquake3-server\"\r\napt-get update --quiet\r\napt-get install --quiet --assume-yes ioquake3-server\r\ncp -r \/usr\/lib\/ioquake3\/* \/mnt\/server\/\r\n\r\nif [ ! -d \/mnt\/server\/.egg-install ]; then\r\n    mkdir -p \/mnt\/server\/.egg-install\r\nfi\r\n\r\ncd \/mnt\/server\/.egg-install\r\n\r\nif [ ! -f \"quake3-1.32-assets.zip\" ]; then\r\n    echo_info \"Downloading Q3A assets archive\"\r\n    curl -sSL \"https:\/\/drive.usercontent.google.com\/download?id=1ZQQZv4PT6yuSAQ5zoEgOen-sPKW9lCy2&confirm=y\" -o \"quake3-1.32-assets.zip\"\r\nfi\r\n\r\necho_info \"Extracting Q3A assets\"\r\nunzip -q -o \"quake3-1.32-assets.zip\" -d \"\/mnt\/server\/\"\r\n\r\nif [ ! -f \"osp-Quake3-1.03a_full.zip\" ]; then\r\n    echo_info \"Downloading Q3A OSP mod\"\r\n    curl -sSL \"https:\/\/drive.usercontent.google.com\/download?id=1RrHzS_FpERtNDYxqflnijlT9gbmsEH5U&confirm=y\" -o \"osp-Quake3-1.03a_full.zip\"\r\nfi\r\n\r\necho_info \"Extracting OSP mod\"\r\nunzip -q -o \"osp-Quake3-1.03a_full.zip\" -d \"\/mnt\/server\/\"\r\n\r\n\r\nif [ ! -f \"q3a-threewave-maps.zip\" ]; then\r\n    echo_info \"Downloading Threewave CTF maps\"\r\n    curl -sSL \"https:\/\/drive.usercontent.google.com\/download?id=1R-0ZuvvqmTwhNescPzw5am1tv-qSYV4m&confirm=y\" -o \"q3a-threewave-maps.zip\"\r\nfi\r\n\r\necho_info \"Extracting Threewave CTF maps\"\r\nunzip -q -o \"q3a-threewave-maps.zip\" -d \"\/mnt\/server\/baseq3\"\r\n\r\nif [ ! -f \"q3a-custom-maps.zip\" ]; then\r\n    echo_info \"Downloading Threewave CTF maps\"\r\n    curl -sSL \"https:\/\/drive.usercontent.google.com\/download?id=14ksyNbZJKgNjVCm_pLFj2Z1GIgJL3e5H&confirm=y\" -o \"q3a-custom-maps.zip\"\r\nfi\r\n\r\necho_info \"Extracting Threewave CTF maps\"\r\nunzip -q -o \"q3a-custom-maps.zip\" -d \"\/mnt\/server\/baseq3\"\r\n\r\ncd \/tmp\r\necho_info \"Getting ZPH configs\"\r\ngit clone https:\/\/github.com\/zeropingheroes\/game-servers.git\r\n\r\necho_info \"Copying ZPH configs into place\"\r\ncp -r \/tmp\/game-servers\/QuakeIIIArena\/configs\/* \/mnt\/server\/\r\n\r\necho_info \"Install complete\"",
             "container": "ghcr.io\/ptero-eggs\/installers:debian",
             "entrypoint": "bash"
         }
@@ -35,7 +35,7 @@
             "default_value": "zph-vanilla-ffa-then-ctf",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:zph-vanilla-ffa-then-ctf,zph-vanilla-ctf,zph-osp-clanarena,zph-osp-freezetag,zph-osp-instagib",
+            "rules": "required|string|in:zph-vanilla-ffa-then-ctf,zph-vanilla-ctf,zph-osp-clanarena,zph-osp-freezetag,zph-osp-instagib,zph-custom-ctf,zph-custom-ffa",
             "field_type": "text"
         },
         {
