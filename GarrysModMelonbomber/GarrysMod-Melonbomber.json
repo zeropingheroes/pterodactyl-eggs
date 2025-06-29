@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-06-29T16:59:42+01:00",
+    "name": "Garry's Mod: Melonbomber (ZPH)",
+    "author": "services@zeropingheroes.co.uk",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/games:source": "ghcr.io\/pterodactyl\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/srcds_run -console -game garrysmod -port {{SERVER_PORT}} -ip {{SERVER_IP}} +sv_lan 1 -maxplayers 32 +host_workshop_collection 483705780 +gamemode melonbomber +map mb_melonbomber",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"VAC secure mode\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\nset -o errexit\r\nset -o pipefail\r\n\r\necho_info(){ echo -e \"\\033[0;32m$*\\033[0m\"; }\r\necho_error(){ echo -e \"\\033[0;31m$*\\033[0m\" >&2; }\r\necho_warning(){ echo -e \"\\033[0;33m$*\\033[0m\"; }\r\n\r\necho_info \"Getting ZPH configs and scripts\"\r\ncd \/tmp\r\ngit clone https:\/\/github.com\/zeropingheroes\/pterodactyl-eggs.git\r\ngit clone https:\/\/github.com\/zeropingheroes\/game-servers.git\r\n\r\necho_info \"Installing SteamCMD and downloading app\"\r\ncd \/tmp\/pterodactyl-eggs\r\nexport STEAMCMD_APPID=4020\r\n\/tmp\/pterodactyl-eggs\/installer-steamcmd.sh\r\n\r\necho_info \"Copying ZPH configs into place\"\r\ncp -fr \/tmp\/game-servers\/GarrysModMelonbomber\/configs\/* \/mnt\/server\/\r\n\r\necho_info \"Installation completed\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
