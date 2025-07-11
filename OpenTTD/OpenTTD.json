@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-07-11T23:42:01+01:00",
+    "name": "OpenTTD (ZPH)",
+    "author": "services@zeropingheroes.co.uk",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/ptero-eggs\/yolks:debian": "ghcr.io\/ptero-eggs\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/openttd -D -x",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"starting game\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#\/bin\/bash\r\n\r\nset -o errexit\r\nset -o pipefail\r\n\r\necho_info(){ echo -e \"\\033[0;32m$*\\033[0m\"; }\r\necho_error(){ echo -e \"\\033[0;31m$*\\033[0m\" >&2; }\r\necho_warning(){ echo -e \"\\033[0;33m$*\\033[0m\"; }\r\n\r\napt update -q\r\napt upgrade -yq\r\napt install -yq unzip xz-utils\r\n\r\nif [ ! -f \"\/mnt\/server\/openttd-14.1-linux-generic-amd64.tar.xz\" ]; then\r\necho_info \"Downloading game server files\"\r\ncurl -L \"https:\/\/cdn.openttd.org\/openttd-releases\/14.1\/openttd-14.1-linux-generic-amd64.tar.xz\" -o \"\/mnt\/server\/openttd-14.1-linux-generic-amd64.tar.xz\"\r\nfi\r\n\r\necho_info \"Extracting game server files\"\r\ntar xf \"\/mnt\/server\/openttd-14.1-linux-generic-amd64.tar.xz\" -C \"\/mnt\/server\" --strip 1\r\n\r\nif [ ! -f \"\/mnt\/server\/opengfx-7.1-all.zip\" ]; then\r\necho_info \"Downloading graphics set\"\r\ncurl -L \"https:\/\/cdn.openttd.org\/opengfx-releases\/7.1\/opengfx-7.1-all.zip\" -o \"\/mnt\/server\/opengfx-7.1-all.zip\"\r\nfi\r\n\r\necho_info \"Extracting graphics sets\"\r\nunzip -o \"\/mnt\/server\/opengfx-7.1-all.zip\" -d \"\/mnt\/server\"\r\ntar xf \"\/mnt\/server\/opengfx-7.1.tar\" -C \"\/mnt\/server\/baseset\" --strip 1\r\n\r\necho_info \"Getting ZPH configs\"\r\ncd \/tmp\r\ngit clone https:\/\/github.com\/zeropingheroes\/game-servers.git\r\n\r\necho_info \"Copying ZPH configs into place\"\r\ncp game-servers\/OpenTTD\/configs\/* \/mnt\/server\/",
+            "container": "ghcr.io\/ptero-eggs\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
