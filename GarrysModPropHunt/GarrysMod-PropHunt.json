@@ -13,7 +13,7 @@
         "ghcr.io\/pterodactyl\/games:source": "ghcr.io\/pterodactyl\/games:source"
     },
     "file_denylist": [],
-    "startup": ".\/srcds_run -console -game garrysmod -port {{SERVER_PORT}} -ip {{SERVER_IP}} +sv_lan 1 -maxplayers 32 +host_workshop_collection 3507201149 +gamemode prop_hunt +map ph_islandhouse",
+    "startup": ".\/srcds_run -console -game garrysmod -port {{SERVER_PORT}} -ip localhost +sv_lan 1 -maxplayers 32 +host_workshop_collection 3507201149 +gamemode prop_hunt +map ph_islandhouse",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"VAC secure mode\"\r\n}",
