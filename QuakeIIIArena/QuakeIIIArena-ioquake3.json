@@ -13,7 +13,7 @@
         "ghcr.io\/ptero-eggs\/yolks:debian": "ghcr.io\/ptero-eggs\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/ioq3ded +set fs_game {{SERVER_MOD}} +set dedicated 1 +set net_ip {{SERVER_IP}} +set net_port {{SERVER_PORT}} +exec {{SERVER_CONFIG}}.cfg",
+    "startup": ".\/ioq3ded +set fs_game {{SERVER_MOD}} +set dedicated 1 +set net_port {{SERVER_PORT}} +exec {{SERVER_CONFIG}}.cfg",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"AAS initialized.\"\r\n}",
