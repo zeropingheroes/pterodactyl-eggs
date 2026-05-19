@@ -1,0 +1,55 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-05-19T22:22:36+01:00",
+    "name": "Left 4 Dead 2 (ZPH)",
+    "author": "ilumos@gmail.com",
+    "description": null,
+    "features": [
+        "gsl_token",
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/games:source": "ghcr.io\/pterodactyl\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/srcds_run -game left4dead2 -norestart -port {{SERVER_PORT}} -ip {{SERVER_IP}} +sv_lan 1 +map {{SERVER_MAP}} {{SERVER_GAMEMODE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"gameserver Steam ID\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\nset -o errexit\r\nset -o pipefail\r\n\r\necho_info(){ echo -e \"\\033[0;32m$*\\033[0m\"; }\r\necho_error(){ echo -e \"\\033[0;31m$*\\033[0m\" >&2; }\r\necho_warning(){ echo -e \"\\033[0;33m$*\\033[0m\"; }\r\n\r\necho_info \"Getting ZPH configs and scripts\"\r\ncd \/tmp\r\ngit clone https:\/\/github.com\/zeropingheroes\/pterodactyl-eggs.git\r\ngit clone https:\/\/github.com\/zeropingheroes\/game-servers.git\r\n\r\necho_info \"Installing SteamCMD and downloading app\"\r\ncd \/tmp\/pterodactyl-eggs\r\nexport STEAMCMD_APPID=222860\r\n\r\necho_info \"Working around the SteamCMD '(Missing Configuration') error by downloading content for Windows first\"\r\nexport STEAMCMD_PLATFORM=windows\r\n\/tmp\/pterodactyl-eggs\/installer-steamcmd.sh\r\n\r\necho_info \"Downloading content for Linux\"\r\nexport STEAMCMD_PLATFORM=linux\r\n\/tmp\/pterodactyl-eggs\/installer-steamcmd.sh\r\n\r\necho_info \"Copying ZPH configs into place\"\r\ncp -fr \/tmp\/game-servers\/Left4Dead2\/configs\/* \/mnt\/server\/\r\n\r\necho_info \"Installation completed\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Map",
+            "description": "The name of the map the server should start with",
+            "env_variable": "SERVER_MAP",
+            "default_value": "c1m1_hotel",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Game Mode",
+            "description": "The game mode",
+            "env_variable": "SERVER_GAMEMODE",
+            "default_value": "versus",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:versus,survival,coop",
+            "field_type": "text"
+        }
+    ]
+}
